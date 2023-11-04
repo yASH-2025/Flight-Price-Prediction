@@ -1,90 +1,106 @@
+<!DOCTYPE html>
 <html lang="en">
-<style>
-    body {
-        background-image: url('/static/img/bg7.jpg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-    }
-
-    img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        align-self: center;
-    }
-
-    .navbar {
-        background-color: #333333;
-    }
-
-    a {
-        color: #f1f9f9;
-    }
-
-    a:hover {
-        color: #f0f0f0;
-    }
-
-    .card {
-        border-radius: 1rem;
-        background-color: hotpink;
-    }
-</style>
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Price Prediction</title>
 
-
-    <!-- BootStrap -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <style>
+        body {
+            background-image: url('/static/img/bg7.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
 
+        .navbar {
+            background-color: rgba(51, 51, 51, 0.7);
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            color: #f1f9f9;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #f0f0f0;
+        }
+
+        .card {
+            border-radius: 1rem;
+            opacity: 0.8;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: rgba(51, 51, 51, 0.7);
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            color: #f1f9f9;
+        }
+        .navbar-brand-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class "navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/" style='color: #e1f4f3;'>FLIGHT PRICE</a>
+                <a class="navbar-brand navbar-brand-center" href="/" style='color: #e1f4f3; text-align: center'>
+                    FLIGHT PRICE
+                </a>
             </div>
         </div>
     </nav>
 
     <div class="container my-5">
         <form action="\predict" method="post">
-
             <div class="row my-3">
-
                 <div class="col-sm-6">
                     <div class="card" style='border-radius: 2.15rem;opacity: 0.7;'>
                         <div class="card-body">
                             <h5 class="card-title">Departure Date</h5>
-                            <input type="datetime-local" name="Dep_Time" id="Dep_Time" min="2023-11-05"
-                                required="required">
+                            <input type="datetime-local" name="Dep_Time" id="Dep_Time" required="required">
                         </div>
                     </div>
                 </div>
-
-
                 <div class="col-sm-6">
                     <div class="card" style='border-radius: 2.15rem;opacity: 0.7;'>
                         <div class="card-body">
                             <h5 class="card-title">Arrival Date</h5>
-                            <input type="datetime-local" name="Arrival_Time" id="Arrival_Time" min="2023-11-05"
-                                required="required">
+                            <input type="datetime-local" name="Arrival_Time" id="Arrival_Time" required="required">
                         </div>
                     </div>
                 </div>
             </div>
-
-
 
             <div class="row my-3">
 
@@ -130,7 +146,8 @@
                     <div class="card" style='border-radius: 2.15rem;opacity: 0.7;'>
                         <div class="card-body">
                             <h5 class="card-title">Stopage</h5>
-                            <select name="stops" required="required">
+                            <select name="stops">
+                                <option value="-1"></option>
                                 <option value="0">Non-Stop</option>
                                 <option value="1">1</option>
                                 <option value="2">2+</option>
@@ -143,7 +160,8 @@
                     <div class="card" style='border-radius: 2.15rem;opacity: 0.7;'>
                         <div class="card-body">
                             <h5 class="card-title">Class</h5>
-                            <select name="Class" required="required">
+                            <select name="Class">
+                                <option value="-1"></option>
                                 <option value="0">Economy</option>
                                 <option value="1">Business</option>
                                 <option value="2">Premium Economy</option>
@@ -154,29 +172,30 @@
                 </div>
             </div>
 
-
-
-
             <div style='text-align:center'>
-                <button type="submit" value='Submit' class="btn btn-primary px-5"
-                    style="font-size: 25px;">Submit</button>
+                <button type="submit" value='Submit' class="btn btn-primary px-5" style="font-size: 25px;">Submit</button>
             </div>
         </form>
 
         <h1 style='text-align: center;color: ivory;'><b>{{ predictions }}</b></h1>
-
-
-        <footer class='text-light bg-dark position-fixed fixed-bottom '>
-            <p class='text-center py my-0'>
-                Made By Team Anil vai
-            </p>
-        </footer>
     </div>
-
-
-
-
     <!-- JavaScript -->
+    <script>
+        // Get the current date and time
+        const currentDate = new Date();
+        const currentDateTime = currentDate.toISOString().slice(0, 16);
+    
+        // Set the min attribute for Departure Date and Arrival Date inputs
+        document.getElementById("Dep_Time").min = currentDateTime;
+        document.getElementById("Arrival_Time").min = currentDateTime;
+    
+        // Disable past dates
+        document.getElementById("Dep_Time").addEventListener("input", function() {
+            const arrivalInput = document.getElementById("Arrival_Time");
+            arrivalInput.min = this.value;
+            arrivalInput.value = this.value; // Reset Arrival Date if it's before Departure Date
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -188,5 +207,4 @@
         crossorigin="anonymous"></script>
 
 </body>
-
 </html>
