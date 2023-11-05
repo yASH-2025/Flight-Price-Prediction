@@ -119,7 +119,7 @@ def predict():
             })
             inp = pd.DataFrame({key: [value] for key, value in inp1.items()})
         elif Total_stops==-1:
-            inp1=knnclass.knnclass1({
+            inp1=knnstop.knnstop1({
             'Journey_day': Journey_day,
             'Class': Class,
             'Total_stops': np.nan,
