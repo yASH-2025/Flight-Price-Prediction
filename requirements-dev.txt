@@ -1,0 +1,7 @@
+flask
+pandas
+seaborn
+matplotlib
+numpy
+scikit-learn
+xgboost
