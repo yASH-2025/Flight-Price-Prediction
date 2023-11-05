@@ -16,6 +16,7 @@ model = joblib.load('C:/Users/sangh/Downloads/Comding/BTP2/Prediction/x/flight_x
 app = Flask(__name__)
 @app.route('/')
 # @cross_origin()
+#savageskull
 def home():
 	return render_template('home.html')
 
