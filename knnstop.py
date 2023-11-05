@@ -4,7 +4,7 @@ from sklearn.impute import KNNImputer
 import math
 
 df = pd.read_csv('Encoded.csv')
-def knnclass1(data):
+def knnstop1(data):
         user_input = pd.Series(data)
         k=7
         imputer = KNNImputer(n_neighbors=k)
