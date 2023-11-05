@@ -13,6 +13,7 @@ def knnclass1(data):
                     'Total_stops',
                     'Duration_in_hours',
                     'Days_left',
+                    'Journey_date',
                     'Journey_month',
                     '6 AM - 12 PM',
                     'After 6 PM',
